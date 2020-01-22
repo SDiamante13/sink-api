@@ -27,12 +27,12 @@ public interface SinqServicePort {
      * 
      * @param getSinqRequest
      * @return
-     *     returns tech.pathtoprogramming.soapy_sinq.GetSinqResponse
+     *     returns GetSinqResponse
      */
     @WebMethod
     @WebResult(name = "getSinqResponse", targetNamespace = "http://pathToProgramming.tech/soapy-sinq", partName = "getSinqResponse")
     public GetSinqResponse getSinq(
         @WebParam(name = "getSinqRequest", targetNamespace = "http://pathToProgramming.tech/soapy-sinq", partName = "getSinqRequest")
-        GetSinqRequest getSinqRequest);
+                GetSinqRequest getSinqRequest);
 
 }
