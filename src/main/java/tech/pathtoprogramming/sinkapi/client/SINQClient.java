@@ -1,8 +1,10 @@
 package tech.pathtoprogramming.sinkapi.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
+import org.springframework.ws.transport.http.ClientHttpRequestMessageSender;
 import tech.pathtoprogramming.sinkapi.model.SinkResponse;
 import tech.pathtoprogramming.soapy_sinq.GetSinqRequest;
 import tech.pathtoprogramming.soapy_sinq.GetSinqResponse;
@@ -17,6 +19,11 @@ public class SINQClient extends WebServiceGatewaySupport {
         request.setModelNumber(modelNumber);
 
         log.info("Requesting sink details for " + modelNumber);
+
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(10000);
+        requestFactory.setReadTimeout(10000);
+        setMessageSender(new ClientHttpRequestMessageSender(requestFactory));
 
         GetSinqResponse response = (GetSinqResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8091/ws/sink", request,
