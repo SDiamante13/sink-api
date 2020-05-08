@@ -26,5 +26,38 @@ Hit the endpoint locally with a GET request at http://localhost:8082/sink/{model
          
 ## Resources
 
-> [Reactive Web Services Client](https://blog.godatadriven.com/jaxws-reactive-client)         
+> [Reactive Web Services Client](https://blog.godatadriven.com/jaxws-reactive-client) 
+
+> [Redis Cache with Spring Boot](https://programmerfriend.com/ultimate-guide-to-redis-cache-with-spring-boot-2-and-spring-data-redis/)
+
+## Cache Notes
+
+* Cacheable objects must implement Serializable
+* Each cacheName can have its own ttl controlled by properties 
+
+## Docker
+
+**Running Redis locally**
+
+`docker run -d -p 6379:6379 --name redis-cache redis:alpine`
+
+**Enter running container**
+
+`docker exec -it redis-cache sh`
+
+**Start redis cli**
+
+> redis-cli
+
+**Delete all values**
+
+> FLUSHALL
+
+**Get all keys**
+
+> KEYS *
+
+**Get value for a given key**
+
+> MGET sinkResponse::VT3322G2       
  

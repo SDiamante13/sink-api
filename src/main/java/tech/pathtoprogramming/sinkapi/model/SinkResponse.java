@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SinkResponse {
+public class SinkResponse implements Serializable {
     private String modelNumber;
     private String skuNumber;
     private String modelName;

@@ -1,6 +1,7 @@
 package tech.pathtoprogramming.sinkapi.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
@@ -13,6 +14,7 @@ import tech.pathtoprogramming.soapy_sinq.SinkDetails;
 @Slf4j
 public class SINQClient extends WebServiceGatewaySupport {
 
+    @Cacheable(cacheNames = "sinkResponse", key = "#modelNumber")
     public SinkResponse getSinkDetails(String modelNumber) {
 
         GetSinqRequest request = new GetSinqRequest();

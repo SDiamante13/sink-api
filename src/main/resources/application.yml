@@ -1,2 +1,14 @@
 server:
   port: 8082
+cache:
+  cacheExpirations:
+    sinkResponse: 100000
+    asyncSinkResponse: 30
+#spring:
+#  cache:
+#    type: redis
+#    redis:
+#      time-to-live: 15552000000ms
+#  redis:
+#    host: localhost
+#    port: 6379
