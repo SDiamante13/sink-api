@@ -1,5 +1,7 @@
 package tech.pathtoprogramming.sinkapi.config;
 
+import com.sun.tools.internal.ws.wsdl.document.http.HTTPConstants;
+import com.sun.xml.internal.ws.client.BindingProviderProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -8,12 +10,20 @@ import tech.pathtoprogramming.reactive.SinqServicePortService;
 import tech.pathtoprogramming.sinkapi.client.AsyncSINQClient;
 import tech.pathtoprogramming.sinkapi.client.SINQClient;
 
+import javax.xml.ws.BindingProvider;
+
+import static com.sun.xml.internal.ws.developer.JAXWSProperties.CONNECT_TIMEOUT;
+import static com.sun.xml.internal.ws.developer.JAXWSProperties.REQUEST_TIMEOUT;
+
 @Configuration
 public class SinkConfiguration {
 
     @Bean
     public SinqServicePort sinqServicePort() {
-        return new SinqServicePortService().getSinqServicePortSoap11();
+        SinqServicePort sinqServicePortSoap = new SinqServicePortService().getSinqServicePortSoap11();
+        ((BindingProvider) sinqServicePortSoap).getRequestContext().put(CONNECT_TIMEOUT, 10000);
+        ((BindingProvider) sinqServicePortSoap).getRequestContext().put(REQUEST_TIMEOUT, 10000);
+        return sinqServicePortSoap;
     }
 
     @Bean
